@@ -1,11 +1,11 @@
 import './App.css';
 import {Photos} from "./Photos";
-import {SelectPhoto} from "./UserTest";
+import {SelectPhoto, UserTest} from "./UserTest";
 
 function App() {
   return (
     <div>
-        <SelectPhoto/>
+        <UserTest/>
     </div>
   );
 }

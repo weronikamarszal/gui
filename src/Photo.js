@@ -8,6 +8,7 @@ function handleChange(value) {
 }
 
 export function Photo({photo, nextClick}) {
+    console.log(photo)
     return (
         <>
             <Title>Oceń </Title>
