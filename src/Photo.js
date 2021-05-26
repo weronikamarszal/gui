@@ -1,30 +1,42 @@
-import {Button, Image, Select, Space} from "antd";
-import Title from "antd/es/typography/Title";
+import {Button, Select} from "antd";
+import {useEffect, useState} from 'react';
+import * as _ from 'lodash';
 
 const {Option} = Select;
 
-function handleChange(value) {
-    console.log(`selected ${value}`);
-}
+const VALIDATION_MESSAGE = 'Podaj wartość'
+const POSSIBLE_SCORES = _.range(1, 6)
 
 export function Photo({photo, nextClick}) {
-    console.log(photo)
+    const [photoScore, setPhotoScore] = useState(null);
+    const [validationError, setValidationError] = useState('');
+
+    useEffect(() => {
+        setPhotoScore(null)
+    }, [photo]);
+
     return (
         <>
-            <Title>Oceń </Title>
-
-            <Select style={{width: 120}} onChange={handleChange}>
-                <Option value="1">1</Option>
-                <Option value="2">2</Option>
-                <Option value="3">3</Option>
-                <Option value="4">4</Option>
-                <Option value="5">5</Option>
+            <Select value={photoScore}
+                    onChange={value => setPhotoScore(Number(value))}
+                    style={{width: 120}}>
+                {POSSIBLE_SCORES.map(i => <Option value={i} key={i}>{i}</Option>)}
             </Select>
+            <div style={{color: 'red'}}>{validationError}</div>
             <p></p>
             <div>
-                <img src={photo}/>
+                <img className="test-image"
+                     src={photo}/>
             </div>
-            <Button onClick={() => nextClick()}>Następny</Button>
+            <p></p>
+            <Button onClick={() => {
+                if (photoScore === null) {
+                    setValidationError(VALIDATION_MESSAGE)
+                    return
+                }
+                setValidationError('')
+                nextClick(photoScore)
+            }}>Następny</Button>
         </>
     )
 }

@@ -1,11 +1,10 @@
 import './App.css';
-import {Photos} from "./Photos";
-import {SelectPhoto, UserTest} from "./UserTest";
+import {Menu} from './Menu';
 
 function App() {
   return (
     <div>
-        <UserTest/>
+        <Menu></Menu>
     </div>
   );
 }
